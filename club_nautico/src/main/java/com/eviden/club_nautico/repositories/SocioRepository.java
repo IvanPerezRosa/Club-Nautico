@@ -8,3 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SocioRepository extends JpaRepository<Socio, Long> {
 }
+
