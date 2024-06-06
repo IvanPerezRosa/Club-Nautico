@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +23,33 @@ public class SalidaService {
     public List<SalidaDTO> getAllSalidas() {
         List<Salida> salidas = salidaRepository.findAll();
         return salidas.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    public SalidaDTO getSalidaById(long salidaId) {
+        Optional<Salida> salidaOptional = salidaRepository.findById(salidaId);
+
+        Salida salida = salidaOptional.get();
+        return convertToDTO(salida);
+    }
+
+    public void deleteAllSalidas() {
+        salidaRepository.deleteAll();
+    }
+
+    public void deleteSalidaById(long salidaId){
+        salidaRepository.deleteById(salidaId);
+    }
+
+    public SalidaDTO updateSalida(long id, SalidaDTO salidaDTO) {
+        Optional<Salida> optionalSalida = salidaRepository.findById(id);
+        Salida salida = optionalSalida.get();
+
+        salida.setFecha(salidaDTO.getFecha());
+        salida.setHora(salidaDTO.getHora());
+        salida.setDestino(salidaDTO.getDestino());
+
+        salidaRepository.save(salida);
+        return convertToDTO(salida);
     }
 
     public SalidaDTO convertToDTO(Salida salida) {
