@@ -25,4 +25,14 @@ public class Salida {
     @Column
     private String destino;
 
+    @Column
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id", nullable = false)
+    private Patron patron;
+
+    @Column
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false)
+    private Barco barco;
+
 }

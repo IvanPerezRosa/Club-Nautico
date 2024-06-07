@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -20,5 +22,13 @@ public class Patron {
     private String nombre;
     @Column
     private String apellido;
+
+    @Column
+    @OneToMany(mappedBy = "patron", cascade = CascadeType.ALL)
+    private List<Salida> salidas;
+
+    @Column
+    @OneToOne
+    private Socio socio;
 
 }

@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -21,6 +23,10 @@ public class Socio {
     @Column
     private Long dni;
 
-    public Socio(long l, String format) {
-    }
+    @Column
+    @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Barco> barcos;
+
+
+
 }
