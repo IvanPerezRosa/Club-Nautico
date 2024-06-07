@@ -22,7 +22,7 @@ public class SocioService {
 
 
     public Socio createSocio(SocioDTO socioDTO) {
-        Socio socio = new Socio(socioDTO.getId(),socioDTO.getNombre(),socioDTO.getApellido(),socioDTO.getDni());
+        Socio socio = new Socio(socioDTO.getId(),socioDTO.getNombre(),socioDTO.getApellido(),socioDTO.getDni(),socioDTO.getBarcos());
         return socioRepository.save(socio);
     }
 
@@ -53,13 +53,14 @@ public class SocioService {
         socio.setNombre(socioDTO.getNombre());
         socio.setApellido(socioDTO.getApellido());
         socio.setDni(socioDTO.getDni());
+        socio.setBarcos(socioDTO.getBarcos());
 
         socioRepository.save(socio);
         return convertToDTO(socio);
     }
 
     public SocioDTO convertToDTO(Socio socio) {
-        return new SocioDTO(socio.getId(), socio.getDni(), socio.getApellido(),socio.getNombre());
+        return new SocioDTO(socio.getId(), socio.getDni(), socio.getApellido(),socio.getNombre(),socio.getBarcos());
     }
 
 

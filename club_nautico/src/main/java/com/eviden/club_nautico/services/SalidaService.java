@@ -16,7 +16,7 @@ public class SalidaService {
     private SalidaRepository salidaRepository;
 
     public Salida createSalida(SalidaDTO salidaDTO) {
-        Salida salida = new Salida(salidaDTO.getId(),salidaDTO.getFecha(),salidaDTO.getHora(),salidaDTO.getDestino());
+        Salida salida = new Salida(salidaDTO.getId(),salidaDTO.getFecha(),salidaDTO.getHora(),salidaDTO.getDestino(),salidaDTO.getPatron(),salidaDTO.getBarco());
         return salidaRepository.save(salida);
     }
 
@@ -47,13 +47,15 @@ public class SalidaService {
         salida.setFecha(salidaDTO.getFecha());
         salida.setHora(salidaDTO.getHora());
         salida.setDestino(salidaDTO.getDestino());
+        salida.setPatron(salidaDTO.getPatron());
+        salida.setBarco(salidaDTO.getBarco());
 
         salidaRepository.save(salida);
         return convertToDTO(salida);
     }
 
     public SalidaDTO convertToDTO(Salida salida) {
-        return new SalidaDTO(salida.getId(),salida.getFecha(),salida.getHora(),salida.getDestino());
+        return new SalidaDTO(salida.getId(),salida.getFecha(),salida.getHora(),salida.getDestino(),salida.getPatron(),salida.getBarco());
     }
 
 }
