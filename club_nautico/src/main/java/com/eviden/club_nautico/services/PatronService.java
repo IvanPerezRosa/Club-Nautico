@@ -5,6 +5,7 @@ import com.eviden.club_nautico.entity.Patron;
 import com.eviden.club_nautico.entity.Salida;
 import com.eviden.club_nautico.entity.Socio;
 import com.eviden.club_nautico.repositories.PatronRepository;
+import com.eviden.club_nautico.repositories.SocioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,14 @@ import java.util.stream.Collectors;
 public class PatronService {
     @Autowired
     private PatronRepository patronRepository;
+    @Autowired
+    private SocioRepository socioRepository;
 
     public Patron createPatron(PatronDTO patronDTO) {
-        Patron patron = new Patron(patronDTO.getId(), patronDTO.getNombre(), patronDTO.getApellido(), patronDTO.getSalidas(), patronDTO.getSocio());
+        Optional<Socio> socioOptional = socioRepository.findById(patronDTO.getId_socio());
+        Socio socio = socioOptional.get();
+
+        Patron patron = new Patron(patronDTO.getNombre(), patronDTO.getApellido(), socio);
         return patronRepository.save(patron);
     }
 
@@ -46,17 +52,19 @@ public class PatronService {
         Optional<Patron> optionalPatron = patronRepository.findById(id);
         Patron patron = optionalPatron.get();
 
+        Optional<Socio> socioOptional = socioRepository.findById(patronDTO.getId_socio());
+        Socio socio = socioOptional.get();
+
         patron.setNombre(patronDTO.getNombre());
         patron.setApellido(patronDTO.getApellido());
-        patron.setSalidas(patronDTO.getSalidas());
-        patron.setSocio(patronDTO.getSocio());
+        patron.setSocio(socio);
 
         patronRepository.save(patron);
         return convertToDTO(patron);
     }
 
     public PatronDTO convertToDTO(Patron patron) {
-        return new PatronDTO(patron.getId_patron(), patron.getNombre(), patron.getApellido(), patron.getSalidas(), patron.getSocio());
+        return new PatronDTO(patron.getId_patron(), patron.getNombre(), patron.getApellido(), patron.getSocio().getId_socio());
     }
 
 }

@@ -5,6 +5,7 @@ import com.eviden.club_nautico.DTOs.SocioDTO;
 import com.eviden.club_nautico.entity.Barco;
 import com.eviden.club_nautico.entity.Socio;
 import com.eviden.club_nautico.repositories.BarcoRepository;
+import com.eviden.club_nautico.repositories.SocioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,18 @@ import java.util.stream.Collectors;
 public class BarcoService {
     @Autowired
     private BarcoRepository barcoRepository;
+    @Autowired
+    private SocioRepository socioRepository;
 
     public Barco createBarco(BarcoDTO barcoDTO) {
-        Barco barco = new Barco(barcoDTO.getId(), barcoDTO.getMatricula(), barcoDTO.getNombre(), barcoDTO.getNum_amarre(), barcoDTO.getCuota_amarre(), barcoDTO.getSalidas(), barcoDTO.getSocio());
+        Optional<Socio> socioOptional = socioRepository.findById(barcoDTO.getSocio_id());
+        Socio socio = socioOptional.get();
+
+        if (socio == null) {
+            socio = new Socio();
+        }
+
+        Barco barco = new Barco(barcoDTO.getId(), barcoDTO.getMatricula(), barcoDTO.getNombre(), barcoDTO.getNum_amarre(), barcoDTO.getCuota_amarre(), socio);
         return barcoRepository.save(barco);
     }
 
@@ -46,20 +56,22 @@ public class BarcoService {
     public BarcoDTO updateBarco(Long id, BarcoDTO barcoDTO){
         Optional<Barco> optionalBarco = barcoRepository.findById(id);
 
+        Optional<Socio> optionalSocio = socioRepository.findById(barcoDTO.getSocio_id());
+        Socio socio = optionalSocio.get();
+
         Barco barco = optionalBarco.get();
         barco.setMatricula(barcoDTO.getMatricula());
         barco.setNombre(barcoDTO.getNombre());
         barco.setNum_amarre(barcoDTO.getNum_amarre());
         barco.setCuota_amarre(barcoDTO.getCuota_amarre());
-        barco.setSalidas(barcoDTO.getSalidas());
-        barco.setSocio(barcoDTO.getSocio());
+        barco.setSocio(socio);
 
         barcoRepository.save(barco);
         return convertToDTO(barco);
     }
 
     public BarcoDTO convertToDTO(Barco barco) {
-        return new BarcoDTO(barco.getId_barco(), barco.getMatricula(), barco.getNombre(), barco.getNum_amarre(), barco.getCuota_amarre(), barco.getSalidas(), barco.getSocio());
+        return new BarcoDTO(barco.getId_barco(), barco.getMatricula(), barco.getNombre(), barco.getNum_amarre(), barco.getCuota_amarre(), barco.getSocio().getId_socio());
     }
 
 }

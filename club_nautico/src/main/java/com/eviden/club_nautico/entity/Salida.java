@@ -16,7 +16,7 @@ public class Salida {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_salida;
+    private long id_salida;
 
     @Column
     private Date fecha;

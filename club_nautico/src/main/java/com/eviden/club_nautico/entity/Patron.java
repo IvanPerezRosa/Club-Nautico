@@ -10,13 +10,12 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Patron {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_patron;
+    private long id_patron;
 
     @Column
     private String nombre;
@@ -28,5 +27,11 @@ public class Patron {
 
     @OneToOne
     private Socio socio;
+
+    public Patron(String nombre, String apellido, Socio socio) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.socio = socio;
+    }
 
 }

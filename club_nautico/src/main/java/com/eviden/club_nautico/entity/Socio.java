@@ -15,7 +15,7 @@ import java.util.List;
 public class Socio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_socio;
+    private long id_socio;
     @Column
     private String nombre;
     @Column

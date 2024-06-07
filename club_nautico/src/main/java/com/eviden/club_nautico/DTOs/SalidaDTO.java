@@ -8,20 +8,20 @@ import java.sql.Date;
 
 @Data
 public class SalidaDTO {
-    private int id;
+    private long id;
     private Date fecha;
     private String hora;
     private String destino;
-    private Patron patron;
-    private Barco barco;
+    private Long patron_id;
+    private Long barco_id;
 
-    public SalidaDTO(int id, Date fecha, String hora, String destino, Patron patron, Barco barco) {
+    public SalidaDTO(long id, Date fecha, String hora, String destino, Long patron_id, Long barco_id) {
         this.id = id;
         this.fecha = fecha;
         this.hora = hora;
         this.destino = destino;
-        this.patron = patron;
-        this.barco = barco;
+        this.patron_id = patron_id;
+        this.barco_id = barco_id;
     }
 
 }

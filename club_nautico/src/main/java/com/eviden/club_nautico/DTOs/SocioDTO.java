@@ -7,18 +7,18 @@ import java.util.List;
 
 @Data
 public class SocioDTO {
-    private int id;
+    private long id;
     private String nombre;
     private String apellido;
     private Long dni;
-    private List<Barco> barcos;
+    private List<Long> barcos_id;
 
-    public SocioDTO(int id, Long dni, String apellido, String nombre, List<Barco> barcos) {
+    public SocioDTO(long id, Long dni, String apellido, String nombre, List<Long> barcos_id) {
         this.id = id;
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
-        this.barcos = barcos;
+        this.barcos_id = barcos_id;
     }
 }
 

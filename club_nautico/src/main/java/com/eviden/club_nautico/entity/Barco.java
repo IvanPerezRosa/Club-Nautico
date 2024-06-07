@@ -10,13 +10,12 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class Barco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_barco;
+    private long id_barco;
 
     @Column
     private String matricula;
@@ -33,5 +32,14 @@ public class Barco {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_socio")
     private Socio socio;
+
+    public Barco (Long id_barco, String matricula, String nombre, Long num_amarre, Long cuota_amarre, Socio socio) {
+        this.id_barco = id_barco;
+        this.matricula = matricula;
+        this.nombre = nombre;
+        this.num_amarre = num_amarre;
+        this.cuota_amarre = cuota_amarre;
+        this.socio = socio;
+    }
 
 }
