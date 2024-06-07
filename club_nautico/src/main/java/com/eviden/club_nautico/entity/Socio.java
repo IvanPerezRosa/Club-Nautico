@@ -15,7 +15,7 @@ import java.util.List;
 public class Socio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_socio;
     @Column
     private String nombre;
     @Column
@@ -23,7 +23,6 @@ public class Socio {
     @Column
     private Long dni;
 
-    @Column
     @OneToMany(mappedBy = "socio", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Barco> barcos;
 

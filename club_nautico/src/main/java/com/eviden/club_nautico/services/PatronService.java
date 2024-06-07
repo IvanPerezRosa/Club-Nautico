@@ -56,7 +56,7 @@ public class PatronService {
     }
 
     public PatronDTO convertToDTO(Patron patron) {
-        return new PatronDTO(patron.getId(), patron.getNombre(), patron.getApellido(), patron.getSalidas(), patron.getSocio());
+        return new PatronDTO(patron.getId_patron(), patron.getNombre(), patron.getApellido(), patron.getSalidas(), patron.getSocio());
     }
 
 }

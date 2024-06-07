@@ -59,7 +59,7 @@ public class BarcoService {
     }
 
     public BarcoDTO convertToDTO(Barco barco) {
-        return new BarcoDTO(barco.getId(), barco.getMatricula(), barco.getNombre(), barco.getNum_amarre(), barco.getCuota_amarre(), barco.getSalidas(), barco.getSocio());
+        return new BarcoDTO(barco.getId_barco(), barco.getMatricula(), barco.getNombre(), barco.getNum_amarre(), barco.getCuota_amarre(), barco.getSalidas(), barco.getSocio());
     }
 
 }

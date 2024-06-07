@@ -16,7 +16,7 @@ public class Salida {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_salida;
 
     @Column
     private Date fecha;
@@ -25,14 +25,12 @@ public class Salida {
     @Column
     private String destino;
 
-    @Column
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id_patron", nullable = false)
     private Patron patron;
 
-    @Column
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "id_barco", nullable = false)
     private Barco barco;
 
 }

@@ -60,7 +60,7 @@ public class SocioService {
     }
 
     public SocioDTO convertToDTO(Socio socio) {
-        return new SocioDTO(socio.getId(), socio.getDni(), socio.getApellido(),socio.getNombre(),socio.getBarcos());
+        return new SocioDTO(socio.getId_socio(), socio.getDni(), socio.getApellido(),socio.getNombre(),socio.getBarcos());
     }
 
 

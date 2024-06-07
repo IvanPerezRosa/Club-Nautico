@@ -16,18 +16,16 @@ public class Patron {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_patron;
 
     @Column
     private String nombre;
     @Column
     private String apellido;
 
-    @Column
     @OneToMany(mappedBy = "patron", cascade = CascadeType.ALL)
     private List<Salida> salidas;
 
-    @Column
     @OneToOne
     private Socio socio;
 

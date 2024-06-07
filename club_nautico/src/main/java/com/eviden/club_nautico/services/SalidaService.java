@@ -55,7 +55,7 @@ public class SalidaService {
     }
 
     public SalidaDTO convertToDTO(Salida salida) {
-        return new SalidaDTO(salida.getId(),salida.getFecha(),salida.getHora(),salida.getDestino(),salida.getPatron(),salida.getBarco());
+        return new SalidaDTO(salida.getId_salida(),salida.getFecha(),salida.getHora(),salida.getDestino(),salida.getPatron(),salida.getBarco());
     }
 
 }
